@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Todow/User</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+  </head>
+  <body>
+    <header>
+        <%- include('header'); %>
+        <div class="content">
+            <h4>Welcome, <%= locals.name %></h4>
+        </div>
+    </header>
+    <div class="container">
+        <% if (locals.login) { %>
+            <div class="lists">
+                <a class="btn btn-primary" href="/new" role="button">Create List</a>
+                <br>
+                <ul class="lists-body">
+                    <% ownlists.forEach((list) => { %>
+                        <li>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <div class="item">
+                                        <%= list.content %>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1">
+                                    <div class="delete">
+                                        <form action="/delete/<%= list.id %>" method="post" role="button">
+                                            <input class="btn btn-primary" type="submit" value="Delete">
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1">
+                                    <a class="btn btn-primary" href="/edit/<%= list.id %> " role="button">Edit</a>
+                                </div>
+                            </div>
+                        </li>
+                        <br>
+                    <%}) %> 
+                </ul>
+            </div>
+        <% } %>
+    </div>
+  </body>
+</html>
